@@ -19,7 +19,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Name</label>
-                                            <input type="text" class="form-control" name="title" value=" {{ $category->name }}">
+                                            <input type="text" class="form-control" name="name" value=" {{ $category->name }}">
                                         </div>
                                     </div>
                                 </div>

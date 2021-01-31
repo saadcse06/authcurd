@@ -86,7 +86,7 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
         $category = Category::find($id);
-        print_r($category->id);die;
+        //print_r($category->id);die;
         $category->name= $request->name;
         $category->slug= str_slug($request->name);
         $category->save();

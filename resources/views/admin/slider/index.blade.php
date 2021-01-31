@@ -13,10 +13,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <a href="{{route('slider.create')}}" class="btn btn-primary">Add New</a>
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title ">All Slider</h4>
-
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

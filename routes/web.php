@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function()
 {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('slider', SliderController::class);
+    Route::resource('category', CategoryController::class);
 }
 );
 

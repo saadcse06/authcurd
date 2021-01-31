@@ -72,7 +72,8 @@ class SliderController extends Controller
      */
     public function show($id)
     {
-        //
+        $slider = Slider::find($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
@@ -83,7 +84,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = Slider::find($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
@@ -95,7 +97,30 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'sub_title' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png'
+        ]);
+        $image= $request->file('image');
+        $slug= str_slug($request->title);
+        $slider = Slider::find($id);
+        if(isset($image)){
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug.'-'.$currentDate.'-'.'.'.$image->getClientOriginalExtension();
+            if(!file_exists('uploads/slider')){
+                mkdir('uploads/slider', 077, true);
+            }
+            $image->move('uploads/slider/', $imagename);
+        }else{
+            $imagename = $slider->image;
+        }
+
+        $slider->title= $request->title;
+        $slider->sub_title= $request->sub_title;
+        $slider->image = $imagename;
+        $slider->save();
+        return redirect()->route('slider.index');
     }
 
     /**
@@ -106,6 +131,11 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $slider = Slider::find($id);
+        if(file_exists('uploads/slider/'.$slider->image)){
+            unlink('uploads/slider/'.$slider->image);
+        }
+        $slider->delete();
+        return redirect()->route('slider.index');
     }
 }

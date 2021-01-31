@@ -6,7 +6,7 @@
     -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+          BANBEIS
         </a>
       </div>
       <div class="sidebar-wrapper">
@@ -23,6 +23,12 @@
               <p>Slider</p>
             </a>
           </li>
+            <li class="nav-item {{ Request::is('admin/category*') ? 'active' : ''}}">
+                <a class="nav-link" href="{{ route('category.index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Category</p>
+                </a>
+            </li>
 
         </ul>
       </div>

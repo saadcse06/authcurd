@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Slider')
+@section('title', 'Category')
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -13,42 +13,40 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{route('slider.create')}}" class="btn btn-primary">Add New</a>
+                    <a href="{{route('category.create')}}" class="btn btn-primary">Add New</a>
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">All Slider</h4>
+                            <h4 class="card-title ">All Category</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead class=" text-primary">
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Sub Title</th>
-                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
                                     <th>Action</th>
                                     </thead>
                                     <tbody>
-                                    @foreach($sliders as $key=>$slider)
+                                    @foreach($categories as $key=>$category)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $slider->title }}</td>
-                                            <td>{{ $slider->sub_title }}</td>
-                                            <td><img src="{{ asset('uploads/slider/'.$slider->image) }}" alt="" style="height: 80px; width: 120px;"></td>
+                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $category->slug }}</td>
                                             <td>
-                                                <a href="{{route('slider.edit', $slider->id)}}" class="btn btn-info btn-sm">Edit</a>
-                                                <form action="{{route('slider.destroy', $slider->id)}}" id="delete-form-{{$slider->id}}" method="post" style="display: none">
-                                                @csrf
-                                                @method('DELETE')
+                                                <a href="{{route('category.update', $category->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                                <form action="{{route('category.destroy', $category->id)}}" id="delete-form-{{$category->id}}" method="post" style="display: none">
+                                                    @csrf
+                                                    @method('DELETE')
                                                 </form>
                                                 <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are You Want to Delete This'))
-                                                {
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form-{{$slider->id}}').submit();
-                                                }else {
-                                                    event.preventDefault();
+                                                        {
+                                                        event.preventDefault();
+                                                        document.getElementById('delete-form-{{$category->id}}').submit();
+                                                        }else {
+                                                        event.preventDefault();
                                                         }
-                                                "><i class="material-icons"></i>Delete</button>
+                                                        "><i class="material-icons"></i>Delete</button>
                                             </td>
                                         </tr>
                                     @endforeach
